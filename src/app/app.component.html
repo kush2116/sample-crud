@@ -1,0 +1,40 @@
+<div>
+  <h2>CRUD Table Example</h2>
+
+  <!-- Add New Post Form -->
+  <div>
+    <input [(ngModel)]="newPost.title" placeholder="Title" />
+    <input [(ngModel)]="newPost.body" placeholder="Body" />
+    <button (click)="addPost()">Add Post</button>
+  </div>
+
+  <!-- Table to Display CRUD Data -->
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts">
+        <td>{{ post.id }}</td>
+        <td>
+          <span *ngIf="!post.editMode">{{ post.title }}</span>
+          <input *ngIf="post.editMode" [(ngModel)]="post.title" />
+        </td>
+        <td>
+          <span *ngIf="!post.editMode">{{ post.body }}</span>
+          <input *ngIf="post.editMode" [(ngModel)]="post.body" />
+        </td>
+        <td>
+          <button *ngIf="!post.editMode" (click)="editPost(post)">Edit</button>
+          <button *ngIf="post.editMode" (click)="updatePost(post)">Save</button>
+          <button (click)="deletePost(post.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
